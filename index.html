@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Спецпроекты Паблистеров</title>
+    <link rel="stylesheet" href="./styles.css?v=20260331-1628" />
+  </head>
+  <body>
+    <div class="noise"></div>
+    <div class="ambient ambient--violet"></div>
+    <div class="ambient ambient--lime"></div>
+
+    <aside class="palm-navigator" id="palm-nav" aria-hidden="true">
+      <div class="palm-navigator__bubble" id="palm-bubble">Ладошка здесь. Веду к задаче.</div>
+      <div class="palm-navigator__rail">
+        <span class="palm-navigator__progress" id="palm-progress"></span>
+      </div>
+      <img
+        class="palm-navigator__icon"
+        id="palm-icon"
+        src="./assets/images/palm-guide.png"
+        alt=""
+      />
+    </aside>
+
+    <header class="topbar">
+      <a class="brand" href="#hero">
+        <span class="brand__year">2026</span>
+        <span class="brand__name">спецпроекты паблистеров</span>
+      </a>
+      <nav class="topbar__nav">
+        <a href="#brief">Задачи</a>
+        <a href="#engine">Подход</a>
+        <a href="#cases">Кейсы</a>
+        <a href="#contact">Контакты</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero reveal is-visible" id="hero">
+        <div class="hero__mesh"></div>
+        <img
+          class="hero__palm hero-parallax"
+          data-depth="18"
+          src="./assets/images/palm-guide.png"
+          alt=""
+          aria-hidden="true"
+        />
+
+        <div class="hero__stage">
+          <div class="hero__label">креативная лаборатория уникальных бренд-историй</div>
+          <h1 class="hero__title">
+            Спецпроекты
+            <span>Паблистеров</span>
+            для бренд-историй
+          </h1>
+          <p class="hero__lead">
+            Превращаем «хочется чего-то вау» в виральные спецпроекты, которые решают задачи
+            бизнеса: от фановых механик до сложных смыслов.
+          </p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#brief">Собрать проект</a>
+            <a class="button button--secondary" href="#cases">Посмотреть кейсы</a>
+            <a class="button button--secondary" href="#engine">Выбрать инструменты</a>
+          </div>
+        </div>
+
+        <aside class="hero__guide hero-parallax" data-depth="10">
+          <img class="hero__guide-palm" src="./assets/images/palm-guide.png" alt="" aria-hidden="true" />
+          <p>
+            Скрепок из Word у нас нет, зато есть рука Паблистеров. Она проведёт по странице и
+            поможет быстро собрать формат под задачу.
+          </p>
+        </aside>
+
+        <div class="hero__cards">
+          <article class="floating-card floating-card--tarot hero-parallax" data-depth="12">
+            <span class="floating-card__tag">суперсила</span>
+            <h2>Насмотренность</h2>
+            <p>Прокачиваем насмотренность и не упускаем тренды.</p>
+          </article>
+          <article class="floating-card floating-card--brief hero-parallax" data-depth="8">
+            <span class="floating-card__tag">палитра</span>
+            <p>боты / mini apps / розыгрыши / wow-посевы / видео / ugc / офлайн</p>
+          </article>
+        </div>
+
+        <div class="ticker">
+          <div class="ticker__track">
+            <span>боты</span>
+            <span>mini apps</span>
+            <span>креативные розыгрыши</span>
+            <span>ai-механики</span>
+            <span>wow-посевы</span>
+            <span>перформансы</span>
+            <span>ugc</span>
+            <span>боты</span>
+            <span>mini apps</span>
+            <span>креативные розыгрыши</span>
+            <span>ai-механики</span>
+            <span>wow-посевы</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="stools reveal" id="stools">
+        <div class="stools-intro">
+          <div class="section-head">
+            <p class="section-head__eyebrow">три стула</p>
+            <h2>Есть три пакета: от точечного запроса до полного цикла реализации под ключ.</h2>
+          </div>
+
+          <aside class="stools-glitch" aria-label="Мини-игра про вовлечение">
+            <div class="stools-glitch__placeholder" id="stools-game-placeholder">
+              <span class="stools-glitch__state">ошибка загрузки</span>
+              <p>Эта часть страницы не прогрузилась.</p>
+              <button class="stools-glitch__button" id="stools-game-start" type="button">Кликни, чтобы починить</button>
+            </div>
+
+            <div class="stools-glitch__game" id="stools-game" hidden>
+              <div class="stools-glitch__meta">
+                <span>space to jump</span>
+                <span id="stools-game-score">00000</span>
+              </div>
+              <canvas class="stools-glitch__canvas" id="stools-game-canvas" width="520" height="320"></canvas>
+              <div class="stools-glitch__overlay" id="stools-game-overlay" hidden>
+                <p>Вот вам и вовлечение! Придумаем геймификацию и под вашу задачу)))</p>
+                <button class="stools-glitch__button stools-glitch__button--solid" id="stools-game-restart" type="button">Сыграть ещё раз</button>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="stools-showcase">
+          <article class="stool-showcase stool-showcase--s">
+            <div class="stool-showcase__seat">
+              <span class="stool-showcase__package">Пакет S</span>
+              <h3>Чёткий запрос</h3>
+              <p>Работаем с вашим конкретным запросом. Делаем, как вы просили, и даже лучше.</p>
+            </div>
+            <div class="stool-showcase__base"></div>
+          </article>
+
+          <article class="stool-showcase stool-showcase--m">
+            <div class="stool-showcase__seat">
+              <span class="stool-showcase__package">Пакет M</span>
+              <h3>Задача, решение и реализация</h3>
+              <p>От вас задача, от нас решение и реализация. Сами придумаем, что можно докрутить.</p>
+            </div>
+            <div class="stool-showcase__base"></div>
+          </article>
+
+          <article class="stool-showcase stool-showcase--l">
+            <div class="stool-showcase__seat">
+              <span class="stool-showcase__package">Пакет L</span>
+              <h3>Проактивный креатив под ключ</h3>
+              <p>Проактивно предлагаем креатив и самостоятельно прорабатываем полную реализацию под ключ.</p>
+            </div>
+            <div class="stool-showcase__base"></div>
+          </article>
+        </div>
+
+        <div class="stools-footer">
+          <span>От простого брифа до большого спецпроекта</span>
+          <p>Ниже можно собрать сценарий и посмотреть, как один и тот же запрос меняется в зависимости от пакета.</p>
+        </div>
+      </section>
+
+      <section class="brief reveal" id="brief">
+        <div class="section-head">
+          <p class="section-head__eyebrow">brief constructor</p>
+          <h2>Не листайте слайды. Выберите задачу, и страница сама соберёт рабочую картину.</h2>
+        </div>
+
+        <div class="brief__layout">
+          <div class="brief__selectors">
+            <div>
+              <p class="brief__label">Что нужно бизнесу</p>
+              <div class="chip-row" id="goal-chips"></div>
+            </div>
+            <div>
+              <p class="brief__label">Какой режим работы нужен</p>
+              <div class="chip-row chip-row--soft" id="package-chips"></div>
+            </div>
+          </div>
+
+          <article class="brief-result">
+            <p class="brief-result__eyebrow">собранный сценарий</p>
+            <h3 id="brief-title"></h3>
+            <p id="brief-description"></p>
+            <div class="brief-result__pulse"></div>
+            <div class="brief-result__mode" id="brief-mode"></div>
+
+            <div class="brief-result__grid">
+              <div class="brief-panel">
+                <span>Рекомендуемые форматы</span>
+                <ul id="brief-formats"></ul>
+              </div>
+              <div class="brief-panel">
+                <span>Как мы зайдём в задачу</span>
+                <ul id="brief-steps"></ul>
+              </div>
+              <div class="brief-panel brief-panel--wide">
+                <span>Что получите на выходе</span>
+                <ul id="brief-deliverables"></ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="engine reveal" id="engine">
+        <div class="engine__beam engine__beam--1"></div>
+        <div class="engine__beam engine__beam--2"></div>
+
+        <div class="section-head">
+          <p class="section-head__eyebrow">наша машина</p>
+          <h2>Держим в курсе статусов по задачам и рассматриваем любые сценарии.</h2>
+        </div>
+
+        <div class="engine__scenes">
+          <article class="scene-card">
+            <div class="scene-card__number">01</div>
+            <h3>Старт</h3>
+            <p>Начинаем проработку идеи в день запроса.</p>
+          </article>
+          <article class="scene-card">
+            <div class="scene-card__number">02</div>
+            <h3>Форматы</h3>
+            <p>Презентуем спецпроекты в разных форматах и бюджетах.</p>
+          </article>
+          <article class="scene-card">
+            <div class="scene-card__number">03</div>
+            <h3>Опора на цифры</h3>
+            <p>Учитываем ваши пожелания и опираемся на цифры.</p>
+          </article>
+          <article class="scene-card scene-card--accent">
+            <div class="scene-card__number">04</div>
+            <h3>План A, B и C</h3>
+            <p>Рассматриваем любые сценарии и всегда готовы предложить альтернативный план.</p>
+          </article>
+        </div>
+
+        <div class="ritual-board" id="ritual-board">
+          <div class="ritual-board__center">
+            <span>идея</span>
+            <span>+</span>
+            <span>форма</span>
+            <span>+</span>
+            <span>kpi</span>
+          </div>
+          <button class="ritual-board__token ritual-board__token--1" data-orbit-angle="0.1" data-orbit-radius="0.42" data-orbit-speed="0.00011" data-description="Лёгкие и сложные сценарии в Telegram: от квизов и калькуляторов до сервисных и игровых механик.">чат-бот</button>
+          <button class="ritual-board__token ritual-board__token--2" data-orbit-angle="0.55" data-orbit-radius="0.34" data-orbit-speed="-0.00012" data-description="Пошаговая история с развилками, голосованиями и эффектом «что будет дальше»." >новелла</button>
+          <button class="ritual-board__token ritual-board__token--3" data-orbit-angle="0.95" data-orbit-radius="0.46" data-orbit-speed="0.0001" data-description="Механика с призами, в которую хочется вовлекаться и возвращаться, а не просто выполнить одно действие.">розыгрыш</button>
+          <button class="ritual-board__token ritual-board__token--4" data-orbit-angle="1.35" data-orbit-radius="0.38" data-orbit-speed="-0.00008" data-description="Быстрый интерфейс внутри мессенджера или платформы для более сложного пользовательского пути.">mini app</button>
+          <button class="ritual-board__token ritual-board__token--5" data-orbit-angle="1.85" data-orbit-radius="0.44" data-orbit-speed="0.00013" data-description="Контент, который люди создают и разносят сами: фото, видео, мемы, реакции, сторис.">ugc</button>
+          <button class="ritual-board__token ritual-board__token--6" data-orbit-angle="2.25" data-orbit-radius="0.33" data-orbit-speed="-0.0001" data-description="Съёмка, монтаж и короткие визуальные формы, которые быстро выходят в паблик и работают на внимание.">видео</button>
+          <button class="ritual-board__token ritual-board__token--7" data-orbit-angle="2.7" data-orbit-radius="0.47" data-orbit-speed="0.00008" data-description="Хулиганский медиазаход, который выглядит как инфоповод, а не как лобовая реклама.">wow-посев</button>
+          <button class="ritual-board__token ritual-board__token--8" data-orbit-angle="3.1" data-orbit-radius="0.36" data-orbit-speed="-0.00012" data-description="Живой выход бренда в пространство: событие, акция, точка контакта или сценический жест.">офлайн</button>
+          <button class="ritual-board__token ritual-board__token--9" data-orbit-angle="3.55" data-orbit-radius="0.43" data-orbit-speed="0.00009" data-description="Маршрут с заданиями, поиском, подсказками и чувством прохождения.">квест</button>
+          <button class="ritual-board__token ritual-board__token--10" data-orbit-angle="3.95" data-orbit-radius="0.35" data-orbit-speed="-0.00011" data-description="Быстрый формат на несколько вопросов, который можно привязать к продукту, инфоповоду или сегментации.">квиз</button>
+          <button class="ritual-board__token ritual-board__token--11" data-orbit-angle="4.35" data-orbit-radius="0.45" data-orbit-speed="0.0001" data-description="Повторяющееся простое действие, которое затягивает и отлично работает на вовлечение.">кликер</button>
+          <button class="ritual-board__token ritual-board__token--12" data-orbit-angle="4.8" data-orbit-radius="0.34" data-orbit-speed="-0.00008" data-description="Полезный инструмент, который даёт человеку быстрый ответ и подводит к продукту или подписке.">калькулятор</button>
+          <button class="ritual-board__token ritual-board__token--13" data-orbit-angle="5.2" data-orbit-radius="0.42" data-orbit-speed="0.00012" data-description="Ролик с нейросеточной графикой или механикой, который работает на вау-эффект и шеринг.">ai-ролик</button>
+          <button class="ritual-board__token ritual-board__token--14" data-orbit-angle="5.65" data-orbit-radius="0.36" data-orbit-speed="-0.0001" data-description="Разговорный формат для бренда, темы или релиза, который можно разворачивать в серию.">подкаст</button>
+          <button class="ritual-board__token ritual-board__token--15" data-orbit-angle="6.0" data-orbit-radius="0.46" data-orbit-speed="0.00009" data-description="Прямой эфир, онлайн-выход или трансляция, которую можно превратить в событие и медиаповод.">стрим</button>
+          <button class="ritual-board__token ritual-board__token--16" data-orbit-angle="6.45" data-orbit-radius="0.33" data-orbit-speed="-0.00012" data-description="Быстрая полевая съёмка и выпуск материала в моменте, пока интерес аудитории ещё горячий.">репортаж</button>
+          <div class="ritual-board__tooltip" id="ritual-tooltip" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="cases reveal" id="cases">
+        <div class="section-head">
+          <p class="section-head__eyebrow">case deck</p>
+          <h2>Идеи, механики и кейсы, которые можно собрать под конкретную задачу.</h2>
+        </div>
+
+        <div class="cases__layout">
+          <div class="case-stack" id="case-stack"></div>
+          <article class="case-view" id="case-view">
+            <p class="case-view__tag" id="case-tag"></p>
+            <h3 id="case-title"></h3>
+            <p class="case-view__request" id="case-request"></p>
+            <p class="case-view__idea" id="case-idea"></p>
+            <div class="case-view__flash"></div>
+            <div class="case-view__meta">
+              <div>
+                <span>Что получилось</span>
+                <p id="case-result"></p>
+              </div>
+              <div>
+                <span>Почему это сработало</span>
+                <p id="case-why"></p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="finale reveal" id="contact">
+        <div class="finale__copy">
+          <p class="section-head__eyebrow">контакт</p>
+          <h2>Остались вопросы? Отлично. Значит, нам есть что обсудить.</h2>
+          <p>
+            Любой запрос или идею можно превратить в спецпроект, который принесёт подписчиков,
+            лиды, участников розыгрыша или славу на PR-премии.
+          </p>
+        </div>
+
+        <div class="contacts contacts--trio">
+          <article class="contact-hero contact-hero--tertiary">
+            <div class="contact-hero__photo-wrap contact-hero__photo-wrap--tertiary">
+              <img class="contact-hero__photo contact-hero__photo--tertiary" src="./assets/images/margarita-mityakina.jpg" alt="Маргарита Митякина" />
+            </div>
+            <div class="contact-hero__content">
+              <span>Маргарита Митякина</span>
+              <p>Операционный директор</p>
+              <a href="tel:+79867310259">+7 986 731 0259</a>
+              <a href="https://t.me/yamargorobbie">Telegram: @yamargorobbie</a>
+            </div>
+          </article>
+          <article class="contact-hero">
+            <div class="contact-hero__photo-wrap">
+              <img class="contact-hero__photo" src="./assets/images/igor-ermolenko.jpg" alt="Игорь Ермоленко" />
+            </div>
+            <div class="contact-hero__content">
+              <span>Игорь Ермоленко</span>
+              <p>Креативный директор Паблистеров</p>
+              <a href="tel:+79155268736">+7 (915) 526-87-36</a>
+              <a href="https://t.me/vtikmashina">Telegram: @vtikmashina</a>
+            </div>
+          </article>
+          <article class="contact-hero contact-hero--secondary">
+            <div class="contact-hero__photo-wrap contact-hero__photo-wrap--secondary">
+              <img class="contact-hero__photo contact-hero__photo--secondary" src="./assets/images/timofey-vakhrushev.jpg" alt="Тимофей Вахрушев" />
+            </div>
+            <div class="contact-hero__content">
+              <span>Тимофей Вахрушев</span>
+              <p>Руководитель отдела спецпроектов</p>
+              <a href="https://t.me/rfanatic">Telegram: @rfanatic</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="./script.js?v=20260331-1642"></script>
+  </body>
+</html>
