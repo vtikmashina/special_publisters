@@ -489,13 +489,25 @@ section {
 }
 
 #open-call {
-  min-height: min(52svh, 520px);
-  grid-template-columns: 1fr;
+  min-height: min(70svh, 700px);
+  grid-template-columns: minmax(360px, 0.95fr) minmax(0, 1.05fr);
   align-items: start;
+  padding-top: clamp(1.8rem, 3vw, 2.4rem);
+  padding-bottom: clamp(1.8rem, 3vw, 2.4rem);
 }
 
 #open-call .story-section__intro {
-  max-width: 900px;
+  max-width: 760px;
+  order: 2;
+}
+
+.open-call-media {
+  order: 1;
+  align-items: start;
+}
+
+.open-call-media .visual-card {
+  min-height: 520px;
 }
 
 .story-media--tenders {
