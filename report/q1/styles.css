@@ -406,14 +406,13 @@ section {
 }
 
 .video-shell {
-  display: grid;
-  gap: 0.65rem;
+  display: block;
   justify-items: center;
   margin: 0;
 }
 
 .video-shell__player {
-  width: min(100%, 320px);
+  width: min(100%, 340px);
   aspect-ratio: 9 / 16;
   max-height: min(64svh, 560px);
   border-radius: var(--radius-lg);
@@ -423,16 +422,7 @@ section {
     radial-gradient(circle at 80% 20%, rgba(127, 99, 255, 0.3), transparent 28%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: var(--shadow);
-  object-fit: cover;
-}
-
-.video-shell__caption {
-  margin: 0;
-  text-align: center;
-  font-size: 0.84rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.74);
+  object-fit: contain;
 }
 
 #pitching {
@@ -454,7 +444,8 @@ section {
 }
 
 #pitching .story-highlight {
-  align-self: end;
+  align-self: start;
+  margin-top: 0.2rem;
 }
 
 .visual-card {
