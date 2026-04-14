@@ -590,6 +590,10 @@ section {
   max-width: 360px;
 }
 
+#max .visual-card--phone {
+  max-width: 280px;
+}
+
 .visual-card--wide {
   min-height: 420px;
 }
