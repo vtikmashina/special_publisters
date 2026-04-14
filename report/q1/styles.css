@@ -1,0 +1,559 @@
+@font-face {
+  font-family: "TT Firs Text";
+  src: url("../../assets/fonts/TT_Firs_Text_Normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TT Firs Text";
+  src: url("../../assets/fonts/TT_Firs_Text_Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TT Bluescreens";
+  src: url("../../assets/fonts/TT_Bluescreens_ExtraBold_Italic.woff2") format("woff2");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --bg: #f2efe8;
+  --ink: #17171d;
+  --muted: #626270;
+  --line: rgba(23, 23, 29, 0.08);
+  --panel: rgba(255, 255, 255, 0.72);
+  --panel-strong: rgba(255, 255, 255, 0.84);
+  --violet: #7f63ff;
+  --lime: #d8ff56;
+  --shadow: 0 24px 60px rgba(17, 17, 22, 0.12);
+  --radius-xl: 36px;
+  --radius-lg: 28px;
+  --radius-md: 22px;
+  --container: 1360px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "TT Firs Text", Arial, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(127, 99, 255, 0.1), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(216, 255, 86, 0.14), transparent 26%),
+    var(--bg);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.noise,
+.ambient {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.noise {
+  opacity: 0.22;
+  background-image: radial-gradient(rgba(36, 36, 48, 0.1) 0.8px, transparent 0.8px);
+  background-size: 18px 18px;
+}
+
+.ambient {
+  z-index: 0;
+  filter: blur(40px);
+}
+
+.ambient--violet {
+  width: 36vw;
+  height: 36vw;
+  top: -10vw;
+  right: -8vw;
+  background: rgba(127, 99, 255, 0.34);
+}
+
+.ambient--lime {
+  width: 28vw;
+  height: 28vw;
+  bottom: 0;
+  left: -8vw;
+  background: rgba(216, 255, 86, 0.22);
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem clamp(1rem, 3vw, 2rem);
+  background: rgba(17, 17, 22, 0.56);
+  backdrop-filter: blur(24px) saturate(1.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brand {
+  display: flex;
+  gap: 0.85rem;
+  align-items: center;
+}
+
+.brand__year,
+.brand__name,
+.topbar__nav a {
+  font-size: 0.84rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.brand__year,
+.topbar__nav a {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.brand__name {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.topbar__nav {
+  display: flex;
+  gap: 1rem;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  padding: 0 0 4rem;
+}
+
+section {
+  width: min(calc(100% - 2rem), var(--container));
+  margin: 1rem auto;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.hero,
+.feature--dark,
+.finale {
+  background:
+    linear-gradient(135deg, rgba(10, 10, 12, 0.97), rgba(24, 24, 30, 0.95)),
+    radial-gradient(circle at top right, rgba(127, 99, 255, 0.26), transparent 24%);
+  color: #fff;
+}
+
+.summary,
+.feature,
+.duo,
+.team,
+.next {
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+  background: var(--panel);
+  backdrop-filter: blur(18px);
+}
+
+.hero {
+  position: relative;
+  min-height: 86svh;
+  padding: clamp(1.6rem, 4vw, 3rem);
+}
+
+.hero__mesh {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, transparent 28%, rgba(255, 255, 255, 0.05) 42%, transparent 58%),
+    radial-gradient(circle at 52% 60%, rgba(216, 255, 86, 0.12), transparent 16%);
+  mix-blend-mode: screen;
+}
+
+.hero__palm {
+  position: absolute;
+  right: 10%;
+  top: 6%;
+  width: min(26vw, 360px);
+  opacity: 0.14;
+  transform: rotate(12deg);
+}
+
+.hero__copy {
+  position: relative;
+  z-index: 2;
+  max-width: 880px;
+}
+
+.hero__eyebrow,
+.section-head__eyebrow,
+.metric-card__value,
+.summary-card__tag,
+.duo-card__tag,
+.finale__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hero__eyebrow {
+  display: inline-flex;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  background: rgba(127, 99, 255, 0.18);
+}
+
+.hero h1,
+.section-head h2,
+.duo-card h3,
+.finale h2 {
+  margin: 0;
+  font-family: "TT Bluescreens", "TT Firs Text", Arial, sans-serif;
+  font-style: italic;
+  font-weight: 800;
+  line-height: 0.94;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  max-width: 9ch;
+  font-size: clamp(4rem, 11vw, 8rem);
+}
+
+.hero h1 span {
+  color: var(--violet);
+}
+
+.hero__lead {
+  max-width: 48rem;
+  margin: 1.4rem 0 0;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.hero__stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.metric-card,
+.summary-card,
+.duo-card,
+.visual-card,
+.hero__report-card,
+.checklist__item {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.metric-card {
+  padding: 1.15rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.metric-card__value {
+  display: block;
+  margin-bottom: 0.6rem;
+  color: var(--lime);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+}
+
+.metric-card p,
+.summary-card p,
+.feature__copy p,
+.duo-card p,
+.hero__report-card p,
+.team__copy p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.hero__report-card {
+  position: absolute;
+  right: clamp(1rem, 3vw, 2rem);
+  top: clamp(1rem, 3vw, 2rem);
+  z-index: 2;
+  width: min(320px, 32vw);
+  padding: 1.1rem 1.15rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px);
+}
+
+.hero__report-card span {
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+}
+
+.section-head {
+  display: grid;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-head__eyebrow,
+.duo-card__tag,
+.summary-card__tag,
+.finale__eyebrow {
+  color: var(--violet);
+  font-size: 0.78rem;
+}
+
+.section-head--light .section-head__eyebrow {
+  color: rgba(216, 255, 86, 0.88);
+}
+
+.section-head h2 {
+  max-width: 12ch;
+  font-size: clamp(2.8rem, 7vw, 5.8rem);
+}
+
+.section-head--light h2 {
+  color: #fff;
+}
+
+.summary__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.summary-card {
+  padding: 1.15rem;
+  background: var(--panel-strong);
+  border: 1px solid rgba(255, 255, 255, 0.58);
+}
+
+.summary-card--accent,
+.duo-card--accent {
+  background: linear-gradient(160deg, rgba(127, 99, 255, 0.2), rgba(255, 255, 255, 0.88));
+}
+
+.feature {
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+}
+
+.feature__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.feature__layout--reverse {
+  grid-template-columns: minmax(340px, 0.7fr) minmax(0, 1fr);
+}
+
+.feature__layout--reverse .feature__copy {
+  order: 2;
+}
+
+.feature__layout--reverse .visual-card {
+  order: 1;
+}
+
+.feature__copy {
+  display: grid;
+  gap: 1rem;
+}
+
+.feature__copy strong {
+  font-weight: 700;
+}
+
+.feature__visual-grid,
+.feature__visual-stack,
+.team__gallery,
+.duo-card__media {
+  display: grid;
+  gap: 1rem;
+}
+
+.feature__visual-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.duo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.duo-card {
+  padding: 1.2rem;
+  background: var(--panel-strong);
+  border: 1px solid rgba(255, 255, 255, 0.58);
+}
+
+.duo-card h3 {
+  margin-top: 0.45rem;
+  margin-bottom: 0.9rem;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.duo-card__media {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1rem;
+}
+
+.visual-card {
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.visual-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.visual-card--tall {
+  min-height: 560px;
+}
+
+.visual-card--phone {
+  max-width: 360px;
+  justify-self: center;
+}
+
+.visual-card--wide {
+  min-height: 420px;
+}
+
+.team__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.team__gallery {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.inline-link {
+  display: inline-flex;
+  margin-top: 0.25rem;
+  color: var(--violet);
+  font-weight: 700;
+}
+
+.checklist {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.checklist__item {
+  padding: 1.15rem;
+  background: var(--panel-strong);
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  line-height: 1.55;
+}
+
+.finale {
+  padding: clamp(2rem, 5vw, 4rem);
+  text-align: center;
+}
+
+.finale h2 {
+  font-size: clamp(3rem, 8vw, 6rem);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 1100px) {
+  .hero__stats,
+  .summary__grid,
+  .duo,
+  .checklist,
+  .feature__layout,
+  .team__layout,
+  .team__gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .feature__visual-grid,
+  .duo-card__media {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero__report-card {
+    position: static;
+    width: auto;
+    margin-top: 1.5rem;
+  }
+
+  .hero {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  section {
+    width: min(calc(100% - 1rem), var(--container));
+  }
+
+  .topbar__nav {
+    display: none;
+  }
+
+  .hero h1,
+  .section-head h2,
+  .duo-card h3,
+  .finale h2 {
+    max-width: 100%;
+  }
+
+  .feature__visual-grid,
+  .duo-card__media,
+  .team__gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__palm {
+    width: 42vw;
+    right: -2vw;
+  }
+}
