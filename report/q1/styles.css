@@ -617,9 +617,24 @@ section {
 }
 
 .requirement-meme {
-  margin: 0 0 1rem;
-  min-height: 320px;
-  max-height: 420px;
+  width: min(100%, 420px);
+  margin: 0.35rem 0 1rem;
+  min-height: 0;
+  max-height: 240px;
+  justify-self: start;
+}
+
+.requirement-meme img {
+  object-fit: contain;
+}
+
+#next {
+  grid-template-columns: 1fr;
+}
+
+#next .story-section__intro {
+  max-width: 520px;
+  gap: 0.8rem;
 }
 
 .quote-card,
