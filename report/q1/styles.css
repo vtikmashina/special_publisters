@@ -477,13 +477,33 @@ section {
 }
 
 .tender-gallery {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
+  display: block;
 }
 
-.tender-gallery .visual-card {
-  min-height: 220px;
+.tender-gallery--overlay {
+  position: relative;
+  height: 280px;
+  margin-top: 0.8rem;
+}
+
+.tender-gallery__item {
+  position: absolute;
+  width: 56%;
+  min-height: 180px;
+}
+
+.tender-gallery__item--back {
+  top: 8px;
+  right: 10px;
+  transform: rotate(3deg);
+  z-index: 1;
+}
+
+.tender-gallery__item--front {
+  left: 12px;
+  bottom: 0;
+  transform: rotate(-2deg);
+  z-index: 2;
 }
 
 .visual-card {
@@ -523,8 +543,13 @@ section {
 .quote-card {
   min-height: 220px;
   display: grid;
-  align-content: end;
+  align-content: start;
   gap: 0.8rem;
+}
+
+.quote-card__top {
+  display: grid;
+  gap: 0.35rem;
 }
 
 .quote-card span {
