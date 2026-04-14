@@ -475,8 +475,39 @@ section {
   max-width: 32rem;
 }
 
+#vibecoding {
+  min-height: min(78svh, 780px);
+  align-items: start;
+  padding-top: clamp(1.9rem, 3.2vw, 2.7rem);
+  padding-bottom: clamp(1.9rem, 3.2vw, 2.7rem);
+}
+
+#vibecoding .section-head h2 {
+  max-width: 11ch;
+}
+
+#open-call {
+  min-height: min(52svh, 520px);
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+
+#open-call .story-section__intro {
+  max-width: 900px;
+}
+
 .story-media--tenders {
   gap: 1rem;
+}
+
+.story-media--videos {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  justify-items: center;
+}
+
+.story-media--videos .video-shell {
+  width: min(100%, 280px);
 }
 
 .tender-gallery {
