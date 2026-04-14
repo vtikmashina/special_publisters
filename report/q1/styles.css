@@ -181,8 +181,8 @@ section {
 
 .hero {
   position: relative;
-  min-height: 78svh;
-  padding: clamp(1.6rem, 4vw, 3rem);
+  min-height: 68svh;
+  padding: clamp(1.6rem, 4vw, 2.4rem);
 }
 
 .hero__mesh {
@@ -206,15 +206,20 @@ section {
 .hero__grid {
   position: relative;
   z-index: 2;
-  min-height: 62svh;
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.7fr);
-  gap: 1.2rem;
-  align-items: end;
+  min-height: auto;
+  display: block;
 }
 
 .hero__copy {
   max-width: 720px;
+}
+
+.hero__lead {
+  max-width: 48rem;
+  margin: 1.4rem 0 0;
+  font-size: clamp(1.05rem, 2vw, 1.22rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .hero__eyebrow,
@@ -252,25 +257,26 @@ section {
   color: var(--violet);
 }
 
-.hero__card {
+.hero__stats {
+  position: relative;
+  z-index: 2;
   display: grid;
-  gap: 0.9rem;
-  padding: 1.2rem;
-  border-radius: var(--radius-lg);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.metric-card {
+  padding: 1.15rem;
   background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
 }
 
-.hero__card-row {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.8rem;
-  align-items: baseline;
-}
-
-.hero__card-row span {
+.metric-card__value {
+  display: block;
+  margin-bottom: 0.6rem;
   color: var(--lime);
   font-family: "TT Bluescreens", "TT Firs Text", Arial, sans-serif;
   font-style: italic;
@@ -278,9 +284,10 @@ section {
   line-height: 0.9;
 }
 
-.hero__card-row p {
+.metric-card p {
   margin: 0;
   color: rgba(255, 255, 255, 0.84);
+  line-height: 1.55;
 }
 
 .section-head {
@@ -517,9 +524,9 @@ section {
 @media (max-width: 1180px) {
   .story-section,
   .story-section--dark,
-  .hero__grid,
   .story-section--grid,
-  .checklist {
+  .checklist,
+  .hero__stats {
     grid-template-columns: 1fr;
   }
 
