@@ -616,6 +616,12 @@ section {
   min-height: 420px;
 }
 
+.requirement-meme {
+  margin: 0 0 1rem;
+  min-height: 320px;
+  max-height: 420px;
+}
+
 .quote-card,
 .mini-story,
 .checklist__item {
