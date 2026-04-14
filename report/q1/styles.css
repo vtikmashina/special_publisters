@@ -696,6 +696,39 @@ section {
   font-size: clamp(3rem, 6vw, 5.4rem);
 }
 
+.pigeon-pond {
+  position: relative;
+  min-height: 360px;
+  margin-top: 1.5rem;
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+    radial-gradient(circle at 20% 30%, rgba(127, 99, 255, 0.16), transparent 30%);
+  overflow: hidden;
+}
+
+.pigeon {
+  position: absolute;
+  width: 112px;
+  height: 112px;
+  border-radius: 22px;
+  object-fit: cover;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.28);
+  user-select: none;
+  transition:
+    transform 320ms ease,
+    left 380ms ease,
+    top 380ms ease,
+    box-shadow 220ms ease;
+  will-change: transform, left, top;
+}
+
+.pigeon:hover {
+  transform: scale(1.04) rotate(1.5deg);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.34);
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(28px);
@@ -758,5 +791,15 @@ section {
 
   .visual-card--wide {
     min-height: 280px;
+  }
+
+  .pigeon-pond {
+    min-height: 300px;
+  }
+
+  .pigeon {
+    width: 84px;
+    height: 84px;
+    border-radius: 16px;
   }
 }
