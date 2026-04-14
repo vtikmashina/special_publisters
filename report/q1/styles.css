@@ -520,11 +520,25 @@ section {
   border-color: rgba(23, 23, 29, 0.08);
 }
 
+.visual-card--contain {
+  display: grid;
+  place-items: center;
+  padding: 0.6rem;
+}
+
 .visual-card img,
 .video-shell video {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.visual-card--contain img {
+  object-fit: contain;
+}
+
+.trendwatching-media .visual-card {
+  min-height: 520px;
 }
 
 .visual-card--phone {
