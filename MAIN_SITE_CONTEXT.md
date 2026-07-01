@@ -29,6 +29,8 @@
 - `favicon.ico` и `assets/icons/palm-icon-*.png` - favicon и touch-иконки сайта, собраны из фирменной ладошки.
 - `assets/images/margarita-mityakina.jpg`, `igor-ermolenko.jpg`, `timofey-vakhrushev.jpg` - аватары в финальном блоке.
 - `texts-for-copywriter.md` - выгрузка текстов страницы для сверки копирайтером.
+- `research/telegram-channels/` - статический экспорт лендинга-исследования про личные
+  Telegram-каналы digital-специалистов.
 
 ## Визуальная система
 
@@ -49,7 +51,41 @@
 
 Важно: Figma-презентация использовалась как визуальный референс, но сайт не должен быть набором скриншотов из презентации. Если добавлять новые блоки, лучше пересобирать их в веб-стиле лендинга, а не вставлять слайды целиком.
 
+## Дополнительные страницы
+
+### Исследование про Telegram-каналы
+
+URL: `https://special.publisters.ru/research/telegram-channels/`
+
+Это отдельная статическая страница-исследование о том, почему digital-специалисты ведут
+личные Telegram-каналы и что меняют блокировки.
+
+Исходный проект:
+
+- GitHub: `https://github.com/dapiskarevada-dot/publishers-landing`
+- локальная рабочая копия: `/Users/igorermolenko/Documents/Лендинг с исследованием`
+
+Технически это Next.js-проект со статическим экспортом. Перед переносом в основной сайт
+он собирается в `out/`, а содержимое `out/` копируется в `research/telegram-channels/`.
+В исходном проекте должен быть настроен `basePath: "/research/telegram-channels"`, а пути
+к публичным ассетам, шрифтам и Lottie-анимациям должны начинаться с
+`/research/telegram-channels/`, чтобы страница работала из подпапки и не конфликтовала
+с корнем основного сайта.
+
+Проверка перед деплоем:
+
+```bash
+cd /Users/igorermolenko/Documents/Лендинг\ с\ исследованием
+node node_modules/next/dist/bin/next build
+
+cd /Users/igorermolenko/Documents/Выгруза\ пптх/site-repo
+python3 -m http.server 4173
+# открыть http://127.0.0.1:4173/research/telegram-channels/
+```
+
 ## Структура страницы
+
+Ниже описана структура основного лендинга `index.html`.
 
 ### 1. Hero
 
