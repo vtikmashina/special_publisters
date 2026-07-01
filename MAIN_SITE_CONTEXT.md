@@ -16,8 +16,14 @@
 - Сервер: `193.53.126.63`
 - Корень сайта на сервере: `/var/www/special.publisters.ru`
 - Nginx-конфиг в репозитории: `deploy/special.publisters.ru.nginx`
+- Docker Compose на сервере: `/var/www/special.publisters.ru/docker-compose.yml`
+- Контейнер сайта: `special-publisters-site`
+- Контейнер слушает: `127.0.0.1:8088`
 
-Сайт статический: HTML, CSS, JS, локальные шрифты и изображения. Сборщика нет.
+Сайт статический: HTML, CSS, JS, локальные шрифты и изображения. Сборщика для
+основного лендинга нет. В продакшне сайт упакован в Docker-контейнер с nginx.
+Публичный системный nginx остаётся владельцем HTTPS/Let's Encrypt и проксирует
+запросы на контейнер.
 
 ## Главные файлы
 
@@ -31,6 +37,9 @@
 - `texts-for-copywriter.md` - выгрузка текстов страницы для сверки копирайтером.
 - `research/telegram-channels/` - статический экспорт лендинга-исследования про личные
   Telegram-каналы digital-специалистов.
+- `Dockerfile` - образ статического сайта на `nginx:1.27-alpine`.
+- `docker-compose.yml` - запуск контейнера `special-publisters-site` на `127.0.0.1:8088`.
+- `docker/nginx/default.conf` - nginx-конфиг внутри контейнера.
 
 ## Визуальная система
 
@@ -301,7 +310,8 @@ git commit -m "..."
 git push
 ssh root@193.53.126.63
 cd /var/www/special.publisters.ru
-git pull
+git pull --ff-only
+docker compose up -d --build
 ```
 
 Если менялись `styles.css` или `script.js`, желательно обновить query-параметры в `index.html`, чтобы браузер не держал старую версию:
@@ -311,7 +321,9 @@ git pull
 <script src="./script.js?v=..."></script>
 ```
 
-Nginx настроен на HTTPS через Let's Encrypt и отдаёт статический сайт из `/var/www/special.publisters.ru`.
+Nginx настроен на HTTPS через Let's Encrypt и проксирует сайт в Docker-контейнер
+`special-publisters-site` на `127.0.0.1:8088`. Сам контейнер отдаёт статические
+файлы из `/usr/share/nginx/html`.
 Для старого раздела отчётов действует отдельное правило:
 
 ```nginx

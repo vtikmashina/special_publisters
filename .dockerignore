@@ -1,0 +1,8 @@
+.git
+.gitignore
+deploy/
+docker-compose.yml
+Dockerfile
+README.md
+MAIN_SITE_CONTEXT.md
+texts-for-copywriter.md
