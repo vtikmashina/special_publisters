@@ -13,6 +13,10 @@ server {
     root /var/www/special.publisters.ru;
     index index.html;
 
+    location ^~ /report/ {
+        return 410;
+    }
+
     location / {
         try_files $uri $uri/ /index.html;
     }
