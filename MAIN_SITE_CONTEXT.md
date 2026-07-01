@@ -72,6 +72,33 @@ URL: `https://special.publisters.ru/research/telegram-channels/`
 `/research/telegram-channels/`, чтобы страница работала из подпапки и не конфликтовала
 с корнем основного сайта.
 
+Важные правила после инцидента с мобильной версией 2026-07-01:
+
+- Не копировать экспорт командой `rsync --delete` в `research/telegram-channels/`.
+  У Next static export имена CSS/JS чанков хешированные. Если удалить старые чанки, а у
+  мобильного браузера останется старый HTML в кеше, страница может перестать открываться.
+  Копировать новый `out/` нужно поверх существующей папки без удаления старых файлов:
+
+  ```bash
+  rsync -a --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r \
+    /Users/igorermolenko/Documents/Лендинг\ с\ исследованием/out/ \
+    /Users/igorermolenko/Documents/Выгруза\ пптх/site-repo/research/telegram-channels/
+  ```
+
+- После копирования не тащить случайный binary churn: проверить `git status`, убрать
+  неиспользуемые ассеты, если они не referenced в HTML/CSS/JS, и нормализовать права шрифтов
+  (`chmod 644 research/telegram-channels/fonts/*.woff*`), чтобы не было mode changes.
+- Мобильный hero не должен зависеть только от Tailwind 4 utilities внутри cascade layers:
+  в исходном `src/app/globals.css` есть fallback-правила для `.hero-mobile` и `.hero-desktop`
+  вне `@layer`. Их нельзя удалять без проверки в мобильном WebView.
+- Для мобильной hero-картинки важно учитывать retina DPR. Файлы называются
+  `image_main-640.webp` и `image_main-960.webp`, но фактически должны быть минимум
+  `1280x647` и `1920x970` соответственно, иначе на iPhone картинка выглядит мыльной.
+- Перед деплоем обязательно проверить страницу не только на десктопе, но и mobile viewport:
+  `390x844`, `deviceScaleFactor: 3`. Минимальная проверка: hero чёрный, картинка загружена,
+  `naturalWidth` у мобильной картинки не меньше `1280`, `scrollWidth === innerWidth`,
+  нет failed requests.
+
 Проверка перед деплоем:
 
 ```bash
