@@ -1,2 +1,2 @@
-:HL["/research/telegram-channels/_next/static/chunks/0k34ecsz3xkac.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"uas0S0dpFvtBHWgm21zd5"}
+:HL["/research/telegram-channels/_next/static/chunks/0_mb6v8g65xve.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"c7X9KppZ-rV-j15KoUYbi"}
