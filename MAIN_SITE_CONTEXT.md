@@ -74,6 +74,18 @@ URL: `https://special.publisters.ru/research/telegram-channels/`
 Текущий экспорт работает как статический HTML/CSS без Next/React runtime scripts:
 карточки и графики видимы без JS, отдельного mobile fallback-файла нет.
 
+Отдельная тестовая версия из ветки
+`https://github.com/dapiskarevada-dot/special_publisters/tree/optimize/gzip-cleanup`
+развёрнута по адресу:
+
+```text
+http://special.publisters.ru/research/telegram-channels-gzip-cleanup/
+```
+
+Она оставляет основной URL исследования без замены и использует те же ассеты
+`/research/telegram-channels/...`, но HTML взят из ветки `optimize/gzip-cleanup`
+и содержит Next runtime scripts.
+
 Если раздел нужно восстановить, брать исходник из отдельного проекта
 `/Users/igorermolenko/Documents/Лендинг с исследованием` или GitHub
 `https://github.com/dapiskarevada-dot/publishers-landing`, но учитывать, что локальная
