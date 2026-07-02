@@ -141,6 +141,10 @@ URL: `https://special.publisters.ru/research/telegram-channels/`
   делает `.survey-card` видимыми без JS, а `.bar-fill[data-static-bar]` получает ширину из
   CSS custom property `--bar-width`. Это нужно, потому что старый React/IntersectionObserver
   на телефоне может не успевать выполнить reveal-анимации; отдельного JS-файла при этом нет.
+- Затем из `research/telegram-channels/index.html` удалены Next/React runtime scripts и
+  script preload. Страница исследования должна работать как полностью статический HTML/CSS:
+  в проверке mobile viewport при `scripts: 0` карточки и 50 графиков видимы, failed requests
+  нет. Если нужно вернуть интерактив, сначала проверить реальный мобильный performance.
 
 Исходный проект:
 
