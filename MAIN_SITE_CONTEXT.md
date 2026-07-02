@@ -106,33 +106,15 @@ URL: `https://special.publisters.ru/research/telegram-channels/`
   фронтенд-фикс. 2026-07-01 страница была на `cd4ee2a`, контейнер отдавал `200`, но внешний TLS
   на системном nginx зависал до `systemctl restart nginx`.
 
-Контекст performance-фикса мобильной версии 2026-07-02:
+Контекст мобильной доступности 2026-07-02:
 
-- Главная причина тяжёлого первого открытия исследования на телефоне была в hero:
-  декоративные Lottie-звёзды подключали крупный `lottie-react` runtime, а HTML preloaded
-  desktop hero и изображения нижних секций. Для мобильного это давало лишнюю загрузку до
-  первого экрана.
-- В исходнике исследования `src/components/Hero.tsx` Lottie-звёзды заменены на inline SVG
-  с тем же контуром и цветами; `lottie-react` не должен попадать в page chunk. Не возвращать
-  Lottie в hero ради трёх декоративных звёзд без отдельной performance-проверки.
-- Некритичные изображения ниже первого экрана помечены `loading="lazy"` и `fetchPriority="low"`.
-  В актуальном экспорте `index.html` должен иметь только 2 preload в head: `header-logo.webp`
-  и служебный script preload Next. Desktop hero image не должен быть preloaded на мобильном.
-- Контейнерный nginx `docker/nginx/default.conf` включает gzip и cache headers:
-  `_next/static/` кешируется на 1 год с `immutable`, остальные статические ассеты на 30 дней,
-  HTML остаётся `no-cache`.
-- После жалобы, что телефон продолжает не грузить страницу, выяснилось по access log:
-  iPhone не запрашивал новый `index.html`, а использовал старый кешированный HTML и дергал
-  старый heavy chunk `0d-rwp289d_1p.js`. Поэтому legacy page chunk-файлы
-  `0d-rwp289d_1p.js`, `0jygeyb7dr5-n.js`, `0s-r44z9q6fzv.js`, `1_zb1yfmwc807.js`
-  заменены содержимым нового облегчённого page chunk без Lottie. Для этих exact URL в
-  контейнерном nginx задан `no-store/no-cache`, а HTML теперь отдаётся с
-  `no-store, no-cache, must-revalidate, max-age=0`, чтобы мобильные браузеры не держали
-  устаревший документ.
-- Проверка после фикса на mobile viewport `390x844`, `deviceScaleFactor: 3`: hero чёрный,
-  mobile image грузится из `image_main-640.webp`, `naturalWidth === 1280`,
-  `scrollWidth === innerWidth`, failed requests нет.
-- После повторной жалобы выяснилось, что проблема шире исследования: на телефоне не
+- Первичная попытка фронтенд-оптимизации исследования убирала Lottie-звёзды из hero,
+  чистила preload и заменяла legacy chunks. После проверки на реальном телефоне эта
+  версия испортила мобильный внешний вид: страница могла выглядеть почти полностью
+  чёрной, а SVG-звёзды были заметно хуже исходных Lottie. Поэтому статический экспорт
+  `research/telegram-channels/` откатан к состоянию `a6f214a` (CTA-версия до
+  performance-эксперимента). Не возвращать SVG-замену звёзд без отдельного дизайн-QA.
+- Истинная причина "не открывается с телефона" оказалась шире исследования: на телефоне не
   открывался даже `https://special.publisters.ru`, а внешние `curl`-проверки подвисали
   на TLS handshake до ServerHello. Обычный URL на десктопе мог открываться из кеша, а
   query-string URL зависал, потому что требовал реального сетевого запроса.
@@ -141,6 +123,9 @@ URL: `https://special.publisters.ru/research/telegram-channels/`
   Текущий сертификат: `Key Type: ECDSA`, issuer `Let's Encrypt YE2`, expiry
   `2026-09-30 06:24:34 UTC`. После `systemctl restart nginx` публичные URL с query string
   стали отвечать `200 OK`, mobile Playwright-проверка снова проходит без failed requests.
+- Контейнерный nginx `docker/nginx/default.conf` всё ещё включает gzip и cache headers.
+  HTML отдаётся с `no-store/no-cache`, чтобы мобильные браузеры не держали устаревший
+  документ после статических экспортов.
 
 Исходный проект:
 
