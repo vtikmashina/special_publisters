@@ -35,8 +35,6 @@
 - `favicon.ico` и `assets/icons/palm-icon-*.png` - favicon и touch-иконки сайта, собраны из фирменной ладошки.
 - `assets/images/margarita-mityakina.jpg`, `igor-ermolenko.jpg`, `timofey-vakhrushev.jpg` - аватары в финальном блоке.
 - `texts-for-copywriter.md` - выгрузка текстов страницы для сверки копирайтером.
-- `research/telegram-channels/` - статический экспорт лендинга-исследования про личные
-  Telegram-каналы digital-специалистов.
 - `Dockerfile` - образ статического сайта на `nginx:1.27-alpine`.
 - `docker-compose.yml` - запуск контейнера `special-publisters-site` на `127.0.0.1:8088`.
 - `docker/nginx/default.conf` - nginx-конфиг внутри контейнера.
@@ -64,137 +62,16 @@
 
 ### Исследование про Telegram-каналы
 
-URL: `https://special.publisters.ru/research/telegram-channels/`
+Лендинг-исследование про личные Telegram-каналы digital-специалистов снят с сайта
+2026-07-02. Статический экспорт `research/telegram-channels/` удалён из репозитория
+и с продакшн-сервера. Основной лендинг в корне сайта не менялся.
+Путь `/research/telegram-channels/` должен возвращать `410 Gone`, чтобы удалённый
+раздел не открывал главную страницу через fallback `try_files ... /index.html`.
 
-Это отдельная статическая страница-исследование о том, почему digital-специалисты ведут
-личные Telegram-каналы и что меняют блокировки.
-
-Актуальное состояние после CTA-деплоя 2026-07-01:
-
-- Текущий продакшн-коммит основного сайта: `a6f214a Update telegram research CTA`.
-- Финальный блок исследования `#contacts` больше не содержит кнопку `publisters.ru`.
-  Вместо неё на фиолетовой панели стоит крупная двухстрочная текстовая ссылка:
-
-  ```text
-  С тихими медиа всё ясно.
-  Если вам нужно громкое — пишите нам
-  ```
-
-- Ссылка ведёт на `https://t.me/pub_listers`.
-- CTA использует `TT Bluescreens`, центрируется по панели, держится в две строки на
-  локально проверенной ширине браузера, имеет `line-height: 1.22`, hover-подчёркивание
-  жёлтым с `text-decoration-skip-ink: auto` и небольшой active/tap-провал как у кнопки.
-- Изменение исходника находится локально в
-  `/Users/igorermolenko/Documents/Лендинг с исследованием/src/components/SectionCTA.tsx`.
-  Этот исходный репозиторий сейчас на ветке `landing/telegram-channels-publish` с revert-коммитами
-  после неудачной попытки, поэтому его не пушили. В продакшн попал только статический экспорт
-  в основном репозитории.
-
-Аварийный контекст после инцидента 2026-07-01:
-
-- Рабочая продакшн-база основного сайта для этого раздела: `cd4ee2a style: update telegram research section labels`.
-  Если нужно "вернуть как было до плохих правок", откатываться именно к `cd4ee2a`.
-- Не возвращать, не cherry-pick-ать и не деплоить мои неудачные коммиты по wide-hero/preload:
-  `7bc9cc8`, `bafe592`, `0df0c55`, `fba40e3`, `60246c6`. GitHub `main` был force-reset
-  обратно на `cd4ee2a`; эти коммиты не должны снова попасть в историю `main`.
-- В локальном исходнике исследования `/Users/igorermolenko/Documents/Лендинг с исследованием`
-  могут оставаться незапушенные локальные коммиты плохой попытки и их revert-коммиты:
-  `1de6dca`, `2389a7a`, `5e8739a`, `2c183a1`. Их не трогать, не пушить в GitHub и не использовать
-  как основу для нового деплоя. Если нужен чистый исходник, лучше удалить/пересоздать локальную
-  ветку или взять свежий clone от origin после явного подтверждения пользователя.
-- Если прод "не грузится", сначала проверять внешний nginx/TLS и контейнер, а не начинать новый
-  фронтенд-фикс. 2026-07-01 страница была на `cd4ee2a`, контейнер отдавал `200`, но внешний TLS
-  на системном nginx зависал до `systemctl restart nginx`.
-
-Контекст мобильной доступности 2026-07-02:
-
-- Первичная попытка фронтенд-оптимизации исследования убирала Lottie-звёзды из hero,
-  чистила preload и заменяла legacy chunks. После проверки на реальном телефоне эта
-  версия испортила мобильный внешний вид: страница могла выглядеть почти полностью
-  чёрной, а SVG-звёзды были заметно хуже исходных Lottie. Поэтому статический экспорт
-  `research/telegram-channels/` откатан к состоянию `a6f214a` (CTA-версия до
-  performance-эксперимента). Не возвращать SVG-замену звёзд без отдельного дизайн-QA.
-- Истинная причина "не открывается с телефона" оказалась шире исследования: на телефоне не
-  открывался даже `https://special.publisters.ru`, а внешние `curl`-проверки подвисали
-  на TLS handshake до ServerHello. Обычный URL на десктопе мог открываться из кеша, а
-  query-string URL зависал, потому что требовал реального сетевого запроса.
-- 2026-07-02 сертификат `special.publisters.ru` перевыпущен через certbot с RSA на ECDSA:
-  `certbot certonly --nginx --cert-name special.publisters.ru -d special.publisters.ru --key-type ecdsa --elliptic-curve secp256r1 --force-renewal --non-interactive --agree-tos`.
-  Позже в тот же день из-за повторных мобильных TLS-timeout и `SSL_do_handshake() failed
-  ... bad key share` сертификат возвращён на RSA:
-  `certbot certonly --nginx --cert-name special.publisters.ru -d special.publisters.ru --key-type rsa --rsa-key-size 2048 --force-renewal --non-interactive --agree-tos`.
-  Текущий сертификат: `Key Type: RSA`, issuer `Let's Encrypt YR1`, expiry
-  `2026-09-30 07:08:50 UTC`.
-- В системном nginx на сервере для HTTPS server-блока `special.publisters.ru` добавлен
-  `listen [::]:443 ssl;` рядом с `listen 443 ssl;`. Backup конфига хранится в
-  `/root/special.publisters.ru.bak-20260702-0735`; не держать backup-файлы в
-  `/etc/nginx/sites-enabled`, потому что nginx подхватывает их как дублирующие server-блоки.
-- Контейнерный nginx `docker/nginx/default.conf` всё ещё включает gzip и cache headers.
-  HTML отдаётся с `no-store/no-cache`, чтобы мобильные браузеры не держали устаревший
-  документ после статических экспортов.
-- Попытка добавить `research/telegram-channels/mobile-fallback.js` для показа карточек и
-  заполнения графиков без ожидания React была полностью откатана коммитами `cbc0cbe`,
-  `d6d116f`, `788aa5d` после жалобы, что с телефона снова не открывается вообще ничего.
-  На проде fallback-файла нет, `docker/nginx/default.conf` не инжектит дополнительные скрипты.
-- После этого добавлен безопасный статический fallback прямо в
-  `research/telegram-channels/index.html`: inline style `research-static-render-fallback`
-  делает `.survey-card` видимыми без JS, а `.bar-fill[data-static-bar]` получает ширину из
-  CSS custom property `--bar-width`. Это нужно, потому что старый React/IntersectionObserver
-  на телефоне может не успевать выполнить reveal-анимации; отдельного JS-файла при этом нет.
-- Затем из `research/telegram-channels/index.html` удалены Next/React runtime scripts и
-  script preload. Страница исследования должна работать как полностью статический HTML/CSS:
-  в проверке mobile viewport при `scripts: 0` карточки и 50 графиков видимы, failed requests
-  нет. Если нужно вернуть интерактив, сначала проверить реальный мобильный performance.
-
-Исходный проект:
-
-- GitHub: `https://github.com/dapiskarevada-dot/publishers-landing`
-- локальная рабочая копия: `/Users/igorermolenko/Documents/Лендинг с исследованием`
-
-Технически это Next.js-проект со статическим экспортом. Перед переносом в основной сайт
-он собирается в `out/`, а содержимое `out/` копируется в `research/telegram-channels/`.
-В исходном проекте должен быть настроен `basePath: "/research/telegram-channels"`, а пути
-к публичным ассетам, шрифтам и Lottie-анимациям должны начинаться с
-`/research/telegram-channels/`, чтобы страница работала из подпапки и не конфликтовала
-с корнем основного сайта.
-
-Важные правила после инцидента с мобильной версией 2026-07-01:
-
-- Не копировать экспорт командой `rsync --delete` в `research/telegram-channels/`.
-  У Next static export имена CSS/JS чанков хешированные. Если удалить старые чанки, а у
-  мобильного браузера останется старый HTML в кеше, страница может перестать открываться.
-  Копировать новый `out/` нужно поверх существующей папки без удаления старых файлов:
-
-  ```bash
-  rsync -a --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r \
-    /Users/igorermolenko/Documents/Лендинг\ с\ исследованием/out/ \
-    /Users/igorermolenko/Documents/Выгруза\ пптх/site-repo/research/telegram-channels/
-  ```
-
-- После копирования не тащить случайный binary churn: проверить `git status`, убрать
-  неиспользуемые ассеты, если они не referenced в HTML/CSS/JS, и нормализовать права шрифтов
-  (`chmod 644 research/telegram-channels/fonts/*.woff*`), чтобы не было mode changes.
-- Мобильный hero не должен зависеть только от Tailwind 4 utilities внутри cascade layers:
-  в исходном `src/app/globals.css` есть fallback-правила для `.hero-mobile` и `.hero-desktop`
-  вне `@layer`. Их нельзя удалять без проверки в мобильном WebView.
-- Для мобильной hero-картинки важно учитывать retina DPR. Файлы называются
-  `image_main-640.webp` и `image_main-960.webp`, но фактически должны быть минимум
-  `1280x647` и `1920x970` соответственно, иначе на iPhone картинка выглядит мыльной.
-- Перед деплоем обязательно проверить страницу не только на десктопе, но и mobile viewport:
-  `390x844`, `deviceScaleFactor: 3`. Минимальная проверка: hero чёрный, картинка загружена,
-  `naturalWidth` у мобильной картинки не меньше `1280`, `scrollWidth === innerWidth`,
-  нет failed requests.
-
-Проверка перед деплоем:
-
-```bash
-cd /Users/igorermolenko/Documents/Лендинг\ с\ исследованием
-node node_modules/next/dist/bin/next build
-
-cd /Users/igorermolenko/Documents/Выгруза\ пптх/site-repo
-python3 -m http.server 4173
-# открыть http://127.0.0.1:4173/research/telegram-channels/
-```
+Если раздел нужно восстановить, брать исходник из отдельного проекта
+`/Users/igorermolenko/Documents/Лендинг с исследованием` или GitHub
+`https://github.com/dapiskarevada-dot/publishers-landing`, собирать отдельный
+статический экспорт и деплоить только после отдельной задачи.
 
 ## Структура страницы
 
