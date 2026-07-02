@@ -8,6 +8,7 @@ server {
 
 server {
     listen 443 ssl;
+    listen [::]:443 ssl;
     server_name special.publisters.ru;
 
     location ^~ /report/ {
@@ -26,5 +27,6 @@ server {
     ssl_certificate /etc/letsencrypt/live/special.publisters.ru/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/special.publisters.ru/privkey.pem;
     include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_ecdh_curve prime256v1:X25519:secp384r1;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 }

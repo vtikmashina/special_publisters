@@ -278,6 +278,21 @@ docker compose up -d --build
 Nginx настроен на HTTPS через Let's Encrypt и проксирует сайт в Docker-контейнер
 `special-publisters-site` на `127.0.0.1:8088`. Сам контейнер отдаёт статические
 файлы из `/usr/share/nginx/html`.
+2026-07-02 для совместимости с частью VPN/маршрутов в системном nginx добавлен
+явный порядок ECDH-кривых:
+
+```nginx
+ssl_ecdh_curve prime256v1:X25519:secp384r1;
+```
+
+Также включён TCP MTU probing через `/etc/sysctl.d/99-special-publisters-mtu.conf`:
+
+```text
+net.ipv4.tcp_mtu_probing = 1
+```
+
+Backup системного nginx-конфига перед этой правкой:
+`/root/special.publisters.ru.tls-tune.bak-20260702-091127`.
 Для старого раздела отчётов действует отдельное правило:
 
 ```nginx
