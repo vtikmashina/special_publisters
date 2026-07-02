@@ -132,6 +132,15 @@ URL: `https://special.publisters.ru/research/telegram-channels/`
 - Проверка после фикса на mobile viewport `390x844`, `deviceScaleFactor: 3`: hero чёрный,
   mobile image грузится из `image_main-640.webp`, `naturalWidth === 1280`,
   `scrollWidth === innerWidth`, failed requests нет.
+- После повторной жалобы выяснилось, что проблема шире исследования: на телефоне не
+  открывался даже `https://special.publisters.ru`, а внешние `curl`-проверки подвисали
+  на TLS handshake до ServerHello. Обычный URL на десктопе мог открываться из кеша, а
+  query-string URL зависал, потому что требовал реального сетевого запроса.
+- 2026-07-02 сертификат `special.publisters.ru` перевыпущен через certbot с RSA на ECDSA:
+  `certbot certonly --nginx --cert-name special.publisters.ru -d special.publisters.ru --key-type ecdsa --elliptic-curve secp256r1 --force-renewal --non-interactive --agree-tos`.
+  Текущий сертификат: `Key Type: ECDSA`, issuer `Let's Encrypt YE2`, expiry
+  `2026-09-30 06:24:34 UTC`. После `systemctl restart nginx` публичные URL с query string
+  стали отвечать `200 OK`, mobile Playwright-проверка снова проходит без failed requests.
 
 Исходный проект:
 
