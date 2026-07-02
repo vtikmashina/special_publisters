@@ -321,6 +321,26 @@ Backup прежних live/archive файлов:
 `/root/cert-backups-20260702-112614`.
 После перевыпуска внешний HTTPS всё равно зависает на TLS handshake, поэтому сертификат
 не был причиной инцидента; HTTP fallback остаётся рабочим путём.
+Дополнительная диагностика показала, что снаружи ломается любой TLS на
+`193.53.126.63:443` независимо от SNI (`special.publisters.ru`, прямой IP,
+`sslip.io`, произвольный SNI). При этом TLS на `:8443` проходит. Поэтому 2026-07-02
+для спецпроекта добавлен дополнительный HTTPS-listener:
+
+```nginx
+listen 8443 ssl;
+```
+
+Рабочие HTTPS fallback-URL:
+
+```text
+https://special.publisters.ru:8443/
+https://special.publisters.ru:8443/research/telegram-channels/
+https://special.publisters.ru:8443/research/telegram-channels-gzip-cleanup/
+```
+
+На `:8443` отдаётся свежий сертификат `special.publisters.ru`
+`05C94FAD36C5D2992AA09FEEFCE3C6C729D8`. Backup перед добавлением listener:
+`/root/special.publisters.ru.add-8443.bak-20260702-113057`.
 Позже в тот же день после повторного деплоя исследования HTTPS снова стал зависать
 снаружи после TCP connect. Tcpdump на сервере показал, что внешний клиент доходит
 до TCP handshake на `:443`, но сам TLS ClientHello до сервера не приходит. При этом
