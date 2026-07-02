@@ -121,6 +121,14 @@ URL: `https://special.publisters.ru/research/telegram-channels/`
 - Контейнерный nginx `docker/nginx/default.conf` включает gzip и cache headers:
   `_next/static/` кешируется на 1 год с `immutable`, остальные статические ассеты на 30 дней,
   HTML остаётся `no-cache`.
+- После жалобы, что телефон продолжает не грузить страницу, выяснилось по access log:
+  iPhone не запрашивал новый `index.html`, а использовал старый кешированный HTML и дергал
+  старый heavy chunk `0d-rwp289d_1p.js`. Поэтому legacy page chunk-файлы
+  `0d-rwp289d_1p.js`, `0jygeyb7dr5-n.js`, `0s-r44z9q6fzv.js`, `1_zb1yfmwc807.js`
+  заменены содержимым нового облегчённого page chunk без Lottie. Для этих exact URL в
+  контейнерном nginx задан `no-store/no-cache`, а HTML теперь отдаётся с
+  `no-store, no-cache, must-revalidate, max-age=0`, чтобы мобильные браузеры не держали
+  устаревший документ.
 - Проверка после фикса на mobile viewport `390x844`, `deviceScaleFactor: 3`: hero чёрный,
   mobile image грузится из `image_main-640.webp`, `naturalWidth === 1280`,
   `scrollWidth === innerWidth`, failed requests нет.
