@@ -1,7 +1,7 @@
 server {
     listen 80;
     listen [::]:80;
-    server_name special.publisters.ru 193.53.126.63;
+    server_name special.publisters.ru 193.53.126.63 special-publisters.193.53.126.63.sslip.io;
 
     location ^~ /report/ {
         return 410;
