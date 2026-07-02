@@ -120,9 +120,11 @@ URL: `https://special.publisters.ru/research/telegram-channels/`
   query-string URL зависал, потому что требовал реального сетевого запроса.
 - 2026-07-02 сертификат `special.publisters.ru` перевыпущен через certbot с RSA на ECDSA:
   `certbot certonly --nginx --cert-name special.publisters.ru -d special.publisters.ru --key-type ecdsa --elliptic-curve secp256r1 --force-renewal --non-interactive --agree-tos`.
-  Текущий сертификат: `Key Type: ECDSA`, issuer `Let's Encrypt YE2`, expiry
-  `2026-09-30 06:24:34 UTC`. После `systemctl restart nginx` публичные URL с query string
-  стали отвечать `200 OK`, mobile Playwright-проверка снова проходит без failed requests.
+  Позже в тот же день из-за повторных мобильных TLS-timeout и `SSL_do_handshake() failed
+  ... bad key share` сертификат возвращён на RSA:
+  `certbot certonly --nginx --cert-name special.publisters.ru -d special.publisters.ru --key-type rsa --rsa-key-size 2048 --force-renewal --non-interactive --agree-tos`.
+  Текущий сертификат: `Key Type: RSA`, issuer `Let's Encrypt YR1`, expiry
+  `2026-09-30 07:08:50 UTC`.
 - В системном nginx на сервере для HTTPS server-блока `special.publisters.ru` добавлен
   `listen [::]:443 ssl;` рядом с `listen 443 ssl;`. Backup конфига хранится в
   `/root/special.publisters.ru.bak-20260702-0735`; не держать backup-файлы в
@@ -130,6 +132,10 @@ URL: `https://special.publisters.ru/research/telegram-channels/`
 - Контейнерный nginx `docker/nginx/default.conf` всё ещё включает gzip и cache headers.
   HTML отдаётся с `no-store/no-cache`, чтобы мобильные браузеры не держали устаревший
   документ после статических экспортов.
+- Попытка добавить `research/telegram-channels/mobile-fallback.js` для показа карточек и
+  заполнения графиков без ожидания React была полностью откатана коммитами `cbc0cbe`,
+  `d6d116f`, `788aa5d` после жалобы, что с телефона снова не открывается вообще ничего.
+  На проде fallback-файла нет, `docker/nginx/default.conf` не инжектит дополнительные скрипты.
 
 Исходный проект:
 
