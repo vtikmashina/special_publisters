@@ -300,6 +300,23 @@ net.ipv4.tcp_mtu_probing = 1
 
 Backup системного nginx-конфига перед этой правкой:
 `/root/special.publisters.ru.tls-tune.bak-20260702-091127`.
+Позже в тот же день после повторного деплоя исследования HTTPS снова стал зависать
+снаружи после TCP connect. Tcpdump на сервере показал, что внешний клиент доходит
+до TCP handshake на `:443`, но сам TLS ClientHello до сервера не приходит. При этом
+порт `80` снаружи отвечает, а `https://special.publisters.ru/` изнутри сервера
+тоже отвечает. Это указывает на сетевую/DPI-блокировку TLS-трафика до RU IP, а не
+на поломку контейнера или HTML.
+
+Как аварийный fallback 2026-07-02 HTTP server-блок перестал редиректить на HTTPS и
+теперь проксирует сайт на `127.0.0.1:8088`. Рабочие fallback-URL:
+
+```text
+http://special.publisters.ru/
+http://special.publisters.ru/research/telegram-channels/
+```
+
+Backup системного nginx-конфига перед включением HTTP fallback:
+`/root/special.publisters.ru.http-fallback.bak-20260702-094659`.
 Для старого раздела отчётов действует отдельное правило:
 
 ```nginx
