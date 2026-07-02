@@ -312,6 +312,15 @@ net.ipv4.tcp_mtu_probing = 1
 
 Backup системного nginx-конфига перед этой правкой:
 `/root/special.publisters.ru.tls-tune.bak-20260702-091127`.
+2026-07-02 сертификат `special.publisters.ru` принудительно перевыпущен как
+Let's Encrypt RSA 2048 через `certbot certonly --nginx --cert-name special.publisters.ru
+-d special.publisters.ru --key-type rsa --rsa-key-size 2048 --force-renewal`.
+Новый serial: `05C94FAD36C5D2992AA09FEEFCE3C6C729D8`, issuer `Let's Encrypt YR1`,
+validity: `2026-07-02 10:27:49 UTC` - `2026-09-30 10:27:48 UTC`.
+Backup прежних live/archive файлов:
+`/root/cert-backups-20260702-112614`.
+После перевыпуска внешний HTTPS всё равно зависает на TLS handshake, поэтому сертификат
+не был причиной инцидента; HTTP fallback остаётся рабочим путём.
 Позже в тот же день после повторного деплоя исследования HTTPS снова стал зависать
 снаружи после TCP connect. Tcpdump на сервере показал, что внешний клиент доходит
 до TCP handshake на `:443`, но сам TLS ClientHello до сервера не приходит. При этом
