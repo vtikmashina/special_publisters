@@ -130,12 +130,6 @@ URL: `https://special.publisters.ru/research/telegram-channels/`
 - Контейнерный nginx `docker/nginx/default.conf` всё ещё включает gzip и cache headers.
   HTML отдаётся с `no-store/no-cache`, чтобы мобильные браузеры не держали устаревший
   документ после статических экспортов.
-- 2026-07-02 добавлен `research/telegram-channels/mobile-fallback.js` и подключение через
-  container nginx `sub_filter` только для `/research/telegram-channels/`. Причина: старый
-  экспорт скрывает `.survey-card` через `opacity:0` и держит `.bar-fill` на `width:0%` до
-  React/IntersectionObserver. На телефоне тяжёлый JS мог не успевать, поэтому карточки и
-  графики оставались пустыми. Fallback сразу показывает карточки и выставляет ширину баров
-  по уже отрендеренным значениям, не меняя дизайн.
 
 Исходный проект:
 
