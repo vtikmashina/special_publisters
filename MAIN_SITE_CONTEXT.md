@@ -313,10 +313,15 @@ Backup системного nginx-конфига перед этой правк�
 ```text
 http://special.publisters.ru/
 http://special.publisters.ru/research/telegram-channels/
+http://193.53.126.63/
+http://193.53.126.63/research/telegram-channels/
 ```
 
 Backup системного nginx-конфига перед включением HTTP fallback:
 `/root/special.publisters.ru.http-fallback.bak-20260702-094659`.
+Если браузер автоматически заменяет `http://special.publisters.ru/` на HTTPS и снова
+висит, использовать прямой IP по HTTP. Backup перед добавлением IP в `server_name`:
+`/root/special.publisters.ru.ip-fallback.bak-20260702-094944`.
 Для старого раздела отчётов действует отдельное правило:
 
 ```nginx
