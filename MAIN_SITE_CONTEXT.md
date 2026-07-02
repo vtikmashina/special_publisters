@@ -123,6 +123,10 @@ URL: `https://special.publisters.ru/research/telegram-channels/`
   Текущий сертификат: `Key Type: ECDSA`, issuer `Let's Encrypt YE2`, expiry
   `2026-09-30 06:24:34 UTC`. После `systemctl restart nginx` публичные URL с query string
   стали отвечать `200 OK`, mobile Playwright-проверка снова проходит без failed requests.
+- В системном nginx на сервере для HTTPS server-блока `special.publisters.ru` добавлен
+  `listen [::]:443 ssl;` рядом с `listen 443 ssl;`. Backup конфига хранится в
+  `/root/special.publisters.ru.bak-20260702-0735`; не держать backup-файлы в
+  `/etc/nginx/sites-enabled`, потому что nginx подхватывает их как дублирующие server-блоки.
 - Контейнерный nginx `docker/nginx/default.conf` всё ещё включает gzip и cache headers.
   HTML отдаётся с `no-store/no-cache`, чтобы мобильные браузеры не держали устаревший
   документ после статических экспортов.
