@@ -35,6 +35,8 @@
 - `favicon.ico` и `assets/icons/palm-icon-*.png` - favicon и touch-иконки сайта, собраны из фирменной ладошки.
 - `assets/images/margarita-mityakina.jpg`, `igor-ermolenko.jpg`, `timofey-vakhrushev.jpg` - аватары в финальном блоке.
 - `texts-for-copywriter.md` - выгрузка текстов страницы для сверки копирайтером.
+- `research/telegram-channels/` - статический экспорт лендинга-исследования про личные
+  Telegram-каналы digital-специалистов.
 - `Dockerfile` - образ статического сайта на `nginx:1.27-alpine`.
 - `docker-compose.yml` - запуск контейнера `special-publisters-site` на `127.0.0.1:8088`.
 - `docker/nginx/default.conf` - nginx-конфиг внутри контейнера.
@@ -62,16 +64,21 @@
 
 ### Исследование про Telegram-каналы
 
-Лендинг-исследование про личные Telegram-каналы digital-специалистов снят с сайта
-2026-07-02. Статический экспорт `research/telegram-channels/` удалён из репозитория
-и с продакшн-сервера. Основной лендинг в корне сайта не менялся.
-Путь `/research/telegram-channels/` должен возвращать `410 Gone`, чтобы удалённый
-раздел не открывал главную страницу через fallback `try_files ... /index.html`.
+URL: `https://special.publisters.ru/research/telegram-channels/`
+
+Лендинг-исследование про личные Telegram-каналы digital-специалистов восстановлен
+2026-07-02 после TLS-настройки сервера для совместимости с частью VPN. Восстановление
+сделано из проверенного статического экспорта коммита `4743938`, без сборки из текущего
+грязного локального исходника.
+
+Текущий экспорт работает как статический HTML/CSS без Next/React runtime scripts:
+карточки и графики видимы без JS, отдельного mobile fallback-файла нет.
 
 Если раздел нужно восстановить, брать исходник из отдельного проекта
 `/Users/igorermolenko/Documents/Лендинг с исследованием` или GitHub
-`https://github.com/dapiskarevada-dot/publishers-landing`, собирать отдельный
-статический экспорт и деплоить только после отдельной задачи.
+`https://github.com/dapiskarevada-dot/publishers-landing`, но учитывать, что локальная
+копия может содержать незакоммиченные или исторически неудачные правки. Не использовать
+её как основу без отдельной проверки diff и mobile QA.
 
 ## Структура страницы
 
