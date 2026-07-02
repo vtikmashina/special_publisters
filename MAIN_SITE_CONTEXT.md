@@ -136,6 +136,11 @@ URL: `https://special.publisters.ru/research/telegram-channels/`
   заполнения графиков без ожидания React была полностью откатана коммитами `cbc0cbe`,
   `d6d116f`, `788aa5d` после жалобы, что с телефона снова не открывается вообще ничего.
   На проде fallback-файла нет, `docker/nginx/default.conf` не инжектит дополнительные скрипты.
+- После этого добавлен безопасный статический fallback прямо в
+  `research/telegram-channels/index.html`: inline style `research-static-render-fallback`
+  делает `.survey-card` видимыми без JS, а `.bar-fill[data-static-bar]` получает ширину из
+  CSS custom property `--bar-width`. Это нужно, потому что старый React/IntersectionObserver
+  на телефоне может не успевать выполнить reveal-анимации; отдельного JS-файла при этом нет.
 
 Исходный проект:
 
